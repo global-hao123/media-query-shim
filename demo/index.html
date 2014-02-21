@@ -78,7 +78,7 @@
         respond();
         WIN[addEventListener || "attachEvent"]((WIN[addEventListener] ? "" : "on") + "resize", function() {
             resizing = 1;
-        }, !1);
+        });
         !function() {
             if(resizing) {
                 resizing = 0;
