@@ -2,13 +2,13 @@
 
 ## 方案一
 
-保留原生 media query 写法【性能最高，代码量倍增】
+保留原生 media query 写法【性能最高，代码量和维护成本倍增】
 
 ### USAGE
 
 #### SETUP1
 
-准备两类 css 兼容方法：
+准备两类 css 兼容方法，按浏览器加载：
 
 ```css
 /*
@@ -38,15 +38,14 @@
 
 #### SETUP2
 
-在 body 节点后，粘贴代码：
+初始化应及早完成，避免首次宽度判断造成闪屏
 
 ```html
 
-<!-- <body> -->
 <!--[if lte IE 8]>
+<script src="../dist/media_query_shim.js"></script>
 <script>
-!function(n,e,t){var i=window,r=document,c=0,o="addEventListener",u=function(t){t=r.body||r.documentElement;if(!t)return;var c=t.className,o=function(n,e){if(n>=+e[0])return e[0];for(var t=e.length,i;i=+e[--t];){if(n<i)return i}}(t.clientWidth||i.innerWidth||0,(e||"").split(",").sort(function(n,e){return+e-+n}));if(o&&!~c.indexOf(n+o))t.className=c.replace(new RegExp("\\s*"+n+"\\d+\\s*","g"),"")+" "+n+o};u();i[o||"attachEvent"]((i[o]?"":"on")+"resize",function(){c=1},!1);!function(){if(c){c=0;u()}setTimeout(arguments.callee,t||200)}()}(
-
+Gl.mediaQuery(
     // the prefix of class name
     "w"
 
@@ -91,11 +90,10 @@ css：
 
 #### SETUP2
 
-在 body 节点后，粘贴代码：
+配置初始化参数
 
 ```javascript
-!function(n,e,t){var i=window,r=document,c=0,o="addEventListener",u=function(t){t=r.body||r.documentElement;if(!t)return;var c=t.className,o=function(n,e){if(n>=+e[0])return e[0];for(var t=e.length,i;i=+e[--t];){if(n < i)return i}}(t.clientWidth||i.innerWidth||0,(e||"").split(",").sort(function(n,e){return+e-+n}));if(o&&!~c.indexOf(n+o))t.className=c.replace(new RegExp("\\s*"+n+"\\d+\\s*","g"),"")+" "+n+o};u();i[o||"attachEvent"]((i[o]?"":"on")+"resize",function(){c=1},!1);!function(){if(c){c=0;u()}setTimeout(arguments.callee,t||200)}()}(
-
+Gl.mediaQuery(
     // the prefix of class name
     "w"
 
@@ -106,5 +104,3 @@ css：
     // , 200
 );
 ```
-
-注意配置参数
