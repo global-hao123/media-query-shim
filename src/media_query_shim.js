@@ -5,18 +5,18 @@ window.Gl.mediaQuery = function(prefix, queries, speed) {
         , resizing = 0
         , addEventListener = WIN.addEventListener
         , respond = function(body) {
-            body = DOC.body || DOC.documentElement;
+            body = DOC.documentElement;
             if(!body) return;
             var className = body.className
                 , match = function(width, queries) {
-                    if(width >= +queries[0]) return queries[0];
-                    for(var l = queries.length, q; q = +queries[--l];) {
-                        if(width < q) return q;
+                    if(width >= +queries[0].k) return 0;
+                    for(var l = queries.length, q; q = +queries[--l].k;) {
+                        if(width > q) return l;
                     }
-                }(body.clientWidth || WIN.innerWidth || 0, (queries || "").split(",").sort(function(a, b) {
-                    return +b - +a;
+                }(body.clientWidth || WIN.innerWidth || 0, (queries || []).sort(function(a, b) {
+                    return +b.k - +a.k;
                 }));
-            if(match && !~className.indexOf(prefix + match)) body.className = className.replace(new RegExp("\\s*" + prefix + "\\d+\\s*", "g"), "") + " " + prefix + match;
+            if(match >= 0 && !~className.indexOf(prefix + queries[match].v)) body.className = className.replace(new RegExp("\\s*" + prefix + "\\d+\\s*", "g"), "") + " " + prefix + queries[match].v;
         }
     respond();
     setTimeout(function() {
