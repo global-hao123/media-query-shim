@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>media-query-shim</title>
+
+    <style>
+    *{ margin: 0; padding: 0;}
+    p{
+        display: none;
+        font-size: 100px;
+        font: 200px Tahoma;
+        color: #fff;
+        background: #000;
+        text-align: center;
+    }
+
+    /*
+    >1130
+     */
+    @media (min-width: 1130px) {
+        .t960{ display: none;}
+        .t1130{ display: none;}
+        .t1200{ display: block;}
+    }
+    .w1200 .t960{ display: none;}
+    .w1200 .t1130{ display: none;}
+    .w1200 .t1200{ display: block;}
+
+    /*
+    960~1130
+     */
+    @media (max-width: 1130px) {
+        .t960{ display: none;}
+        .t1130{ display: block;}
+        .t1200{ display: none;}
+    }
+    .w1130 .t960{ display: none;}
+    .w1130 .t1130{ display: block;}
+    .w1130 .t1200{ display: none;}
+
+
+    /*
+    <960
+     */
+    @media (max-width: 960px) {
+        .t960{ display: block;}
+        .t1130{ display: none;}
+        .t1200{ display: none;}
+    }
+    .w960 .t960{ display: block;}
+    .w960 .t1130{ display: none;}
+    .w960 .t1200{ display: none;}
+    </style>
+    <!--[if lte IE 8]>
+    <script src="../src/media_query_shim.js"></script>
+    <script>
+    Gl.mediaQuery(
+        // the prefix of class name
+        "w"
+
+        // queries list
+        , "1130,960,1200"
+
+        // switch speed, default: 200
+        // , 200
+    );
+    </script>
+    <![endif]-->
+</head>
+<body>
+
+    <div class="info">
+        <p class="t960">960px</p>
+        <p class="t1200">1200px</p>
+        <p class="t1130">1130px</p>
+    </div>
+</body>
+</html>
